@@ -12,3 +12,6 @@ zuul:
       path: /api/customers/**
       url: http://localhost:8200
 
+    auth-service:
+      path: /api/auth/**
+      url: http://localhost:8199
