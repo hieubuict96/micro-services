@@ -1,0 +1,110 @@
+{
+  "appName": " برنامج  تسيير المركبات   -  UI React APP",
+  "404": "الصفحة غير متوفرة",
+  "msg404": "الصفحة التي تبحث عنها تم نقلها أو إزالتها أو إعادة تسميتها ",
+  "navigation": {
+    "home": "الصفحة الرئيسية",
+    "about": "حول",
+    "contact": "اتصل",
+    "vehicles": "مركبات",
+    "add": "أضف",
+    "login": "تسجيل الدخول",
+    "language": "تفضيل اللغات",
+    "languages": "قائمة تفضيلات اللغة",
+    "countries": "بلدان",
+    "settings": "الإعدادات"
+  },
+  "countries": {
+    "name": "اسم",
+    "nativeName": "الاسم الأصلي",
+    "alpha2Code": "رمز",
+    "callingCodes": "رموز الاتصال",
+    "capital": "عاصمة",
+    "region": "المنطقة",
+    "subregion": "المنطقة الفرعية",
+    "population": "تعداد السكان",
+    "timezones": "المناطق الزمنية",
+    "currenciesSymbol": "رمز |",
+    "currenciesName": "عملة",
+    "flag": "العلم"
+  },
+  "languages": {
+    "title": "اختار اللغة ",
+    "backend": "اختار لغة الخادم الخلفي ",
+    "short": {
+      "fr": "Fr",
+      "en": "En",
+      "it": "It",
+      "ar": "عر",
+      "de":"De",
+      "es": "Es"
+    },
+    "long": {
+      "fr": "Français",
+      "en": "English",
+      "it": "Italiano",
+      "ar": "عربيه",
+      "de":"Deutsch",
+      "es": "Espanol"
+    }
+  },
+  "home": {
+    "welcome": "مرحبا بكم في برنامج تسيير المركبات",
+    "listVehicles":  "قائمة المركبات",
+    "listLanguages": "قائمة اللغات المعمول بها",
+    "listCountries": "قائمة البلدان",
+    "list": "قائمة المركبات",
+    "manage": "تسيير المركبات",
+    "name": "شرارة رضا",
+    "count": "هنالك  {{countVehicles}} عربة في النظام"  
+  },
+  "add": {
+    "vehicle": "اضافة مركبة",
+    "cancel" : "إلغاء",
+    "save" : "حفظ"
+  },
+  "update": {
+    "vehicle": "تحديث مركبة",
+    "cancel" : "إلغاء",
+    "save" : "حفظ",
+    "message":"تم إضافة العربة بنجاح"
+  },
+  "words": {
+    "vehicle": "مركبة",
+    "vehicles": "مركبات",
+    "add": "اضافة",
+    "update": "تحديث",
+    "delete": "حذف",
+    "list": "قائمة",
+    "name": "اسم",
+		"vin": "رقم التعريف",      
+	  "plate": "لوحة التسجيل",  
+	  "year": "العام", 
+    "position": "موقع", 
+    "location": "مكان", 
+    "tag": "تأشير", 
+    "model": "صنف", 
+    "type": "نوع", 
+    "brand": "brand", 
+    "mileage": "كلومترات", 
+    "color": "لون", 
+    "engine": "محرك", 
+    "tyre": "tyre", 
+    "price": "ثمن", 
+    "numOfWindows": "النوافذ",  
+    "cost": "تكلفة", 
+    "aws": "رباعية الدفع", 
+    "view": "عرض", 
+    "electric": "كهرباء",
+    "language_code": "رمز اللغة",
+    "name_in_native_language": "الاسم باللغة الأصلية",
+    "date_format":"صيغة التاريخ",
+    "currency": "عملة" 
+  },
+  "delete": {
+    "vehicle": "حذف مركبة"
+  },
+  "translations" : {
+    "Welcome to React Translation": "مرحبًا بك في"
+  }
+}

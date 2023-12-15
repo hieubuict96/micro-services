@@ -1,0 +1,15 @@
+authorization:
+  policies:
+  - route: /test/endpoint/v0
+    claims:
+    - urlPattern: /test/[0-9]*
+      urlClaim: /test/:userId
+    - urlPattern: /test/[0-9]*/ping
+      urlClaim: /test/:userId/ping
+      userRoleClaim: admin
+  - route: /test/endpoint/v1
+    claims:
+    - urlPattern: /test/[0-9]*
+      urlClaim: /test/:userId
+    - urlPattern: /test/[0-9]*/pong
+      urlClaim: /test/:userId/pong

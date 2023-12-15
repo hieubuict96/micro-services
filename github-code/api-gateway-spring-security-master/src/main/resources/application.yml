@@ -1,0 +1,22 @@
+zuul:
+  routes:
+    auth:
+      path: /auth-service/**
+      serviceId: auth-service
+    chat:
+      path: /chat-service/**
+      serviceId: chat-service
+
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: 8080
+
+#default to 200 and 20 respectively.
+zuul:
+  host:
+    maxTotalConnections: 200
+    maxPerRouteConnections: 20
+#ribbon.eureka.enabled=false

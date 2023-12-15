@@ -1,0 +1,23 @@
+eureka:
+  instance:
+    #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8763
+
+spring:
+  application:
+    name: service-a
+  profiles:
+    active: a
+
+#security:
+#  oauth2:
+#    resource:
+#      id: service-a
+#      user-info-uri: http://localhost:8762/uaa/user-me
+#      prefer-token-info: false

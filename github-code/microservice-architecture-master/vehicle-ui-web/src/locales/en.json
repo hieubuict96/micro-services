@@ -1,0 +1,109 @@
+{
+  "appName": "Vehicles UI React APP Web",
+  "404": "الصفحة غير متوفرة",
+  "msg404": "الصفحة التي تبحث عنها تم نقلها أو إزالتها أو إعادة تسميتها ",
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "vehicles": "Vehicles",
+    "add": "Add",
+    "login": "login",
+    "language": "Language preference",
+    "languages": "List of supported languages",
+    "countries": "Countries",
+    "settings": "Settings"
+  },
+  "countries": {
+    "name": "name",
+    "nativeName": "Native Name",
+    "alpha2Code": "Code",
+    "callingCodes": "Calling Codes",
+    "capital": "Capital",
+    "region": "Region",
+    "subregion": "Sub region",
+    "population": "Population",
+    "timezones": "Timezones",
+    "currenciesSymbol": "Symbol",
+    "currenciesName": "Currencie",
+    "flag": "flag"
+  },
+  "languages": {
+    "title": "Select language ",
+    "backend": "Select language of service Backend",
+    "short": {
+      "fr": "Fr",
+      "en": "En",
+      "it": "It",
+      "ar": "عر",
+      "de":"De",
+      "es": "Es"
+    },
+    "long": {
+      "fr": "Français",
+      "en": "English",
+      "it": "Italiano",
+      "ar": "عربيه",
+      "de":"Deutsch",
+      "es": "Espanol"
+    }
+  },
+  "home": {
+    "welcome": "Welcome to Vehicles UI APP web!",
+    "listVehicles":  "List of  Vehicles",
+    "listLanguages": "List of  Languages",
+    "listCountries": "List of  Countries",
+    "manage": "Manage Vehicles",
+    "name": "CHERARA Reddah",
+    "count": "There are {{countVehicles}} in the system."  
+  },
+  "add": {
+    "vehicle": "Add Vehicle",
+    "cancel" : "Cancel",
+    "save" : "Save"
+  },
+  "update": {
+    "vehicle": "Update Vehicle",
+    "cancel" : "Cancel",
+    "save" : "Save",
+    "message":"Vehicle added successfully."
+  },
+  "words": {
+    "vehicle": "Vehicle",
+    "vehicles": "Vehicles",
+    "add": "Add",
+    "update": "Update",
+    "delete": "Delete",
+    "list": "List",
+    "name": "Name",
+		"vin": "Identification Number",      
+	  "plate": "Registration plate",  
+	  "year": "Year", 
+    "position": "Position", 
+    "location": "Location", 
+    "tag": "Tag", 
+    "model": "Model", 
+    "type": "Type", 
+    "brand": "Brand", 
+    "mileage": "Mileage", 
+    "color": "Color", 
+    "engine": "Engine", 
+    "tyre": "Tyre", 
+    "price": "Price", 
+    "numOfWindows": "Windows",  
+    "cost": "Cost", 
+    "aws": "AWS", 
+    "view": "View",
+    "electric": "Electric",
+    "language_code": "Language code",
+    "name_in_native_language": "Name in native language",
+    "date_format":"Date format",
+    "currency": "Currency"  
+  },
+  "delete": {
+    "vehicle": "Delete Vehicle"
+  },
+  "translations" : {
+    "Welcome to React Translation": "Welcome to React Translation."
+  }
+}

@@ -1,0 +1,124 @@
+version: "3.7"
+
+services:
+  discovery-server:
+    container_name: discovery
+    build:
+      context: ./discovery-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+  notification-service:
+    container_name: notification
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-server:8761/eureka
+    depends_on:
+      - discovery-server
+      - rabbitmq3
+    ports:
+      - "8082:8082"
+  config-server:
+    container_name: config
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-server:8761/eureka
+    depends_on:
+      - discovery-server
+    ports:
+      - "8888:8888"
+  customer-service:
+    container_name: customer
+    build:
+      context: ./customer-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-server:8761/eureka/
+      - DOCKER_MYSQL_HOST=app_db
+    depends_on:
+      - discovery-server
+      - mysql_db
+      - rabbitmq3
+    links:
+      - mysql_db:app_db
+    ports:
+      - "8081:8081"
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-server:8761/eureka
+    depends_on:
+      - discovery-server
+    ports:
+      - "8180:8180"
+  inventory-service:
+    container_name: inventory-service
+    build:
+      context: ./inventory-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.service-url.defaultZone=http://discovery-server:8761/eureka
+      - DOCKER_MONGO_HOST=mongo_db
+    depends_on:
+      - discovery-server
+      - mongo_db
+    links:
+      - mongo_db:inventory_db
+    ports:
+      - "8083:8083"
+  mysql_db:
+    image: "mysql:8.0.22"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: customerm
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: 12345
+  mongo_db:
+    image: "mongo:4.2.10"
+    restart: always
+    ports:
+      - 27017:27017
+  mysql_key:
+    image: "mysql:8.0.22"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: key
+      MYSQL_PASSWORD: 12345
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0.0
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: mysql
+      DB_DATABASE: keycloak
+      DB_USER: key
+      DB_PASSWORD: 12345
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+      - --import-realm
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql_key
+  rabbitmq3:
+    image: rabbitmq:3.8-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - '5672:5672'
+      - '15672:15672'

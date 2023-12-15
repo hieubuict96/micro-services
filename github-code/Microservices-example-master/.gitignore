@@ -1,0 +1,11 @@
+# Project exclude paths
+/api-gateway/target/
+/config-server/target/
+/customer-service/target/
+/discovery-server/target/
+/inventory-service/target/
+/notification-service/target/
+.docker
+/.idea/
+/dbdata/
+/mysql_keycloak_data/

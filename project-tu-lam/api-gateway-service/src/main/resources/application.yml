@@ -1,0 +1,21 @@
+zuul:
+  host:
+    socket-timeout-millis: 200000 # Thời gian chờ kết nối
+    connect-timeout-millis: 200000 # Thời gian chờ socket
+
+  routes:
+    account-service:
+      path: /api/accounts/**
+      url: http://localhost:8766
+
+server:
+  port: 8765
+
+spring:
+  application:
+    name: api-gateway-service
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka

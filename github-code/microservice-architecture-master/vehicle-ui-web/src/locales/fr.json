@@ -1,0 +1,110 @@
+{
+  "appName": "Vehicles UI React APP",
+  "404": "الصفحة غير متوفرة",
+  "msg404": "الصفحة التي تبحث عنها تم نقلها أو إزالتها أو إعادة تسميتها ",
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "contact": "Contact",
+    "vehicles": "Véhicules",
+    "add": "Ajouter",
+    "language": "Language preference",
+    "languages": "List of supported languages",
+    "login": "Se connecter",
+    "countries": "Pays",
+    "settings": "Réglages"
+  },
+  "home": {
+    "welcome": "Welcome to Vehicles UI APP web!",
+    "listVehicles":  "List of  Vehicles",
+    "listLanguages": "List of  Languages",
+    "listCountries": "List of  Countries",
+    "list": "Liste des  véhicules",
+    "manage": "Gestion des véhicules",
+    "name": "CHERARA Reddah",
+    "count": "Il y a {{countVehicles}} véhicules dans le système." 
+  },
+  "add": {
+    "vehicle": "Ajouter de véhicules",
+    "cancel" : "Annuler",
+    "save" : "Sauvegarde"
+  },
+  "update": {
+    "vehicle": "Mise à jour de véhicules",
+    "cancel" : "Annuler",
+    "save" : "Sauvegarde",
+    "message":"Vehicle added successfully."
+  },
+  "countries": {
+    "name": "Nom",
+    "nativeName": "Nom natif",
+    "alpha2Code": "Code",
+    "callingCodes": "Calling Codes",
+    "capital": "Capital",
+    "region": "Region",
+    "subregion": "Sub region",
+    "population": "Population",
+    "timezones": "Timezones",
+    "currenciesSymbol": "Symbol",
+    "currenciesName": "Currencie",
+    "flag": "flag"
+  },
+  "languages": {
+    "title": "Choisir la langue ",
+    "backend": "Choisir la langue du service Backend",
+    "short": {
+      "fr": "Fr",
+      "en": "En",
+      "it": "It",
+      "ar": "عر",
+      "de":"De",
+      "es": "Es"
+    },
+    "long": {
+      "fr": "Français",
+      "en": "English",
+      "it": "Italiano",
+      "ar": "عربيه",
+      "de":"Deutsch",
+      "es": "Espanol"
+    }
+  },
+  "words": {
+    "vehicle": "Véhicule",
+    "vehicles": "Véhicules",
+    "add": "Ajouter",
+    "update": "Edit",
+    "delete": "Supprimer",
+    "list": "List",
+    "name": "Nom",
+		"vin": "Numéro d'identification vin",      
+	  "plate": "Plaque d'immatriculation",  
+	  "year": "Année", 
+    "position": "Position", 
+    "location": "Location", 
+    "tag": "Tag", 
+    "model": "Model", 
+    "type": "Type", 
+    "brand": "Marque", 
+    "mileage": "Kilométrage", 
+    "color": "Coulour", 
+    "engine": "Moteur", 
+    "tyre": "Pneu", 
+    "price": "Prix", 
+    "numOfWindows": "Fenêtres",  
+    "cost": "Coût",
+    "aws": "AWS", 
+    "view": "Voir",
+    "electric": "Electric",
+    "language_code": "language_code",
+    "name_in_native_language": "Name in Native language",
+    "date_format":"date_format",
+    "currency": "currency" 
+  },
+  "delete": {
+    "vehicle": "Supprimer véhicules"
+  },
+  "translations" : {
+    "Welcome to React Translation": "Bienvenue dans React Translation."
+  }
+}

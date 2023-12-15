@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: centralized-auth-gateway
+  mvc:
+    dispatch-options-request: true
+    
+server:
+  port: 8082
+
+ribbon:
+  eureka:
+    enabled: false
+
+zuul:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Access-Control-Expose-Headers, Access-Control-Allow-Methods
+  ignore-security-headers: true
+  routes:
+    recruiter-service:
+      path: /test/endpoint/v0/**
+      serviceId: forward:/test/endpoint/v0/
+    agent-service:
+      path: /test/endpoint/v1/**
+      serviceId: forward:/test/endpoint/v1/
+    
+eureka:
+  client:
+    enabled: false  

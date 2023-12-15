@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ca.rcherara.services</groupId>
+	<artifactId>rcherara-spring--cloud-microservice</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>config-service</module>			<!-- port: 7761		-->
+		<module>admin-service</module> 			<!-- port: 9761		-->
+		<module>discovery-service</module>		<!-- port: 8761		-->
+		<module>gateway-service</module>        <!-- port: 8080		-->
+		<module>vehicle-service</module>        <!-- port: 8081		-->
+		<module>dealership-service</module> 	<!-- port: 8082		-->
+		<module>transaction-service</module> 	<!-- port: 8083		-->
+	</modules>	
+</project>

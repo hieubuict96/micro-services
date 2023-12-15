@@ -1,0 +1,14 @@
+zuul:
+  host:
+    socket-timeout-millis: 200000 # Thời gian chờ kết nối
+    connect-timeout-millis: 200000 # Thời gian chờ socket
+
+  routes:
+    account-service:
+      path: /api/accounts/**
+      url: http://localhost:8100
+
+    customers-service:
+      path: /api/customers/**
+      url: http://localhost:8200
+
