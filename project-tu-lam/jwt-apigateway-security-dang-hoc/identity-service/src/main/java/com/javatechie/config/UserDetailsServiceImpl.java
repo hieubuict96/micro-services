@@ -1,7 +1,7 @@
 package com.javatechie.config;
 
-import com.javatechie.entity.UserCredential;
-import com.javatechie.repository.UserCredentialRepository;
+import com.javatechie.entity.User;
+import com.javatechie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserCredentialRepository repository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserCredential> credential = repository.findByName(username);
-        return credential.map(CustomUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("user not found with name :" + username));
+        Optional<User> credential = userRepository.findOneByUsername(username);
+        return credential.map(UserDetailsImpl::new).orElseThrow(() -> new UsernameNotFoundException("user not found with name :" + username));
     }
 }

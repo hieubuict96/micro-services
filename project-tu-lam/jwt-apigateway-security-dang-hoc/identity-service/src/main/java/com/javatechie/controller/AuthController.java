@@ -1,9 +1,11 @@
 package com.javatechie.controller;
 
-import com.javatechie.dto.AuthRequest;
-import com.javatechie.entity.UserCredential;
+import com.javatechie.config.UserDetailsImpl;
+import com.javatechie.dto.UserDTO;
 import com.javatechie.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,24 +20,30 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/register")
-    public String addNewUser(@RequestBody UserCredential user) {
+    @PostMapping("/signup")
+    public ResponseEntity<Object> signup(@RequestBody UserDTO user) {
         return service.saveUser(user);
     }
 
-    @PostMapping("/token")
-    public String getToken(@RequestBody AuthRequest authRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        if (authenticate.isAuthenticated()) {
-            return service.generateToken(authRequest.getUsername());
-        } else {
-            throw new RuntimeException("invalid access");
+    @PostMapping("/signin")
+    public ResponseEntity<Object> signin(@RequestBody UserDTO userDTO) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
+            if (authentication.isAuthenticated()) {
+                UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+                UserDTO userResponse = new UserDTO(userDetails);
+                userResponse.setToken(service.generateToken(userDetails.getUsername()));
+                return ResponseEntity.ok(userResponse);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception ex) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token) {
-        service.validateToken(token);
-        return "Token is valid";
+    public ResponseEntity<Object> validateToken(@RequestBody UserDTO userDTO) {
+        return service.validateToken(userDTO.getToken());
     }
 }
