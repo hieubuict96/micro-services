@@ -2,11 +2,7 @@ package com.javatechie.dto;
 
 import com.javatechie.config.UserDetailsImpl;
 import com.javatechie.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;

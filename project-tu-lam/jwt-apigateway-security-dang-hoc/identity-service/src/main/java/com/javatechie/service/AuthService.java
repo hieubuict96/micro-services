@@ -36,9 +36,11 @@ public class AuthService {
             User user = credential.toEntity();
             user.setPassword(passwordEncoder.encode(credential.getPassword()));
             user = userRepository.save(user);
-            return ResponseEntity.ok(new UserDTO(user));
+            UserDTO userDTO = new UserDTO(user);
+            userDTO.setToken(generateToken(userDTO.getUsername()));
+            return ResponseEntity.ok(userDTO);
         } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body(new ExceptionDTO(null, "server error"));
+            return ResponseEntity.internalServerError().body(new ExceptionDTO(null, HttpStatus.INTERNAL_SERVER_ERROR.toString()));
         }
     }
 
@@ -50,12 +52,13 @@ public class AuthService {
         try {
             String username = jwtService.validateToken(token);
             UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
-            return new ResponseEntity<>(userDetails, HttpStatus.OK);
+            userDetails.setPassword(null);
+            return new ResponseEntity<>(new UserDTO(userDetails), HttpStatus.OK);
         } catch (UsernameNotFoundException | IllegalArgumentException | SignatureException | MalformedJwtException |
                  UnsupportedJwtException | ExpiredJwtException ex) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new ExceptionDTO(null, HttpStatus.UNAUTHORIZED.toString()), HttpStatus.UNAUTHORIZED);
         } catch (Exception ex) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ExceptionDTO(null, HttpStatus.INTERNAL_SERVER_ERROR.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

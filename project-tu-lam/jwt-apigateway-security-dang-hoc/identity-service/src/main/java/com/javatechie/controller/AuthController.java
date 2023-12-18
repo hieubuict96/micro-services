@@ -42,7 +42,7 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/validate")
+    @PostMapping("/validate")
     public ResponseEntity<Object> validateToken(@RequestBody UserDTO userDTO) {
         return service.validateToken(userDTO.getToken());
     }

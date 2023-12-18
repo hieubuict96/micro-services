@@ -17,7 +17,7 @@ public class JwtService {
 
     public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
-    public static final long TIME_EXPIRATION_MILISECONDS = 1000 * 60 * 10;
+    public static final long TIME_EXPIRATION_MILISECONDS = 1000 * 60 * 60 * 24 * 30;
 
     public String validateToken(final String token) {
         return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody().getSubject();
