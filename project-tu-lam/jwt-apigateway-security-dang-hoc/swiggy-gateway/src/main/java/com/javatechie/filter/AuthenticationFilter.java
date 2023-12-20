@@ -1,10 +1,14 @@
 package com.javatechie.filter;
 
-import com.javatechie.util.JwtUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javatechie.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,10 +18,14 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Autowired
     private RouteValidator validator;
 
-    //    @Autowired
-//    private RestTemplate template;
     @Autowired
-    private JwtUtil jwtUtil;
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
 
     public AuthenticationFilter() {
         super(Config.class);
@@ -26,24 +34,30 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
-            if (validator.isSecured.test(exchange.getRequest())) {
-                //header contains token or not
+            try {
                 if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
                     throw new RuntimeException("missing authorization header");
                 }
 
                 String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-                if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                    authHeader = authHeader.substring(7);
+                if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                    throw new RuntimeException("authentication failed");
                 }
-                try {
-//                    //REST call to AUTH service
-//                    template.getForObject("http://IDENTITY-SERVICE//validate?token" + authHeader, String.class);
-                    jwtUtil.validateToken(authHeader);
 
-                } catch (Exception e) {
-                    System.out.println("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+                authHeader = authHeader.substring(7);
+
+                ServiceInstance serviceInstance = loadBalancerClient.choose("identity-service");
+                String authURL = serviceInstance.getUri().toString();
+                ResponseEntity<Object> response = restTemplate.postForEntity(authURL + "/auth/validate", new UserDTO(authHeader), Object.class);
+                if (!response.getStatusCode().is2xxSuccessful()) {
+                    throw new RuntimeException("authentication failed");
+                }
+
+                UserDTO userDTO = (UserDTO) response.getBody();
+                exchange.getRequest().getHeaders().add("currentUser", objectMapper.writeValueAsString(userDTO));
+            } catch (Exception ex) {
+                if (validator.isSecured.test(exchange.getRequest())) {
+                    throw new RuntimeException(ex.getMessage());
                 }
             }
 

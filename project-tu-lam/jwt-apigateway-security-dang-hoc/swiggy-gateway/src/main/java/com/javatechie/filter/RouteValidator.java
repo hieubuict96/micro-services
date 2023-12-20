@@ -9,9 +9,10 @@ import java.util.function.Predicate;
 @Component
 public class RouteValidator {
 
+    //list api không phải xác thực
     public static final List<String> openApiEndpoints = List.of(
-            "/auth/register",
-            "/auth/token",
+            "/auth/signin",
+            "/auth/signup",
             "/eureka"
     );
 
@@ -19,5 +20,4 @@ public class RouteValidator {
             request -> openApiEndpoints
                     .stream()
                     .noneMatch(uri -> request.getURI().getPath().contains(uri));
-
 }

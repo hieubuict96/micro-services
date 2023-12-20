@@ -1,12 +1,7 @@
 package com.javatechie.dto;
 
-import com.javatechie.config.UserDetailsImpl;
-import com.javatechie.entity.User;
-import org.springframework.security.core.GrantedAuthority;
-
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class UserDTO {
 
@@ -21,27 +16,8 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        for (String role : user.getRoles().split(",")) {
-            authorities.add(new Authority(role));
-        }
-    }
-
-    public UserDTO(UserDetailsImpl userDetails) {
-        this.id = userDetails.getId();
-        this.username = userDetails.getUsername();
-        this.authorities = userDetails.getAuthorities().stream().map(Authority::new).collect(Collectors.toSet());
-    }
-
-    public User toEntity() {
-        User user = new User();
-        user.setId(this.id);
-        user.setUsername(this.username);
-        user.setPassword(this.password);
-        user.setRoles(authorities.stream().map(Authority::getAuthority).collect(Collectors.joining(",")));
-        return user;
+    public UserDTO(String token) {
+        this.token = token;
     }
 
     public Long getId() {
@@ -84,7 +60,7 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
-    public static class Authority implements GrantedAuthority {
+    public static class Authority {
         private String authority;
 
         public Authority() {
@@ -94,11 +70,6 @@ public class UserDTO {
             this.authority = authority;
         }
 
-        public Authority(GrantedAuthority grantedAuthority) {
-            this.authority = grantedAuthority.getAuthority();
-        }
-
-        @Override
         public String getAuthority() {
             return authority;
         }

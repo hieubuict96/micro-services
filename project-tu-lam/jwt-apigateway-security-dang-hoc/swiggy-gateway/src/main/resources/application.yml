@@ -1,6 +1,13 @@
 spring:
  cloud:
    gateway:
+     globalcors:
+       corsConfigurations:
+         '[/**]':
+           allowedOrigins: "*"
+           allowedMethods: "*"
+           allowedHeaders: "*"
+
      routes:
        - id: swiggy-app
          uri: lb://SWIGGY-APP
@@ -8,7 +15,6 @@ spring:
            - Path=/swiggy/**
          filters:
            - AuthenticationFilter
-
 
        - id: restaurant-service
          uri: lb://RESTAURANT-SERVICE
@@ -21,6 +27,8 @@ spring:
          uri: lb://IDENTITY-SERVICE
          predicates:
            - Path=/auth/**
+         filters:
+         - AuthenticationFilter
 
  application:
    name: SWIGGY-GATEWAY

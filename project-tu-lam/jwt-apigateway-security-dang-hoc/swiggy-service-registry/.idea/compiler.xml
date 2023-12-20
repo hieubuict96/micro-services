@@ -2,21 +2,28 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="identity-service (1)" />
+        <module name="swiggy-service-registry" />
+        <module name="identity-service (2)" />
+        <module name="swiggy-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="identity-service" target="17" />
-      <module name="swiggy-gateway" target="17" />
-      <module name="swiggy-service-registry" target="17" />
+      <module name="soap-ws" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="identity-service" options="-parameters" />
+      <module name="identity-service (1)" options="-parameters" />
+      <module name="identity-service (2)" options="-parameters" />
+      <module name="soap-ws" options="-parameters" />
       <module name="swiggy-gateway" options="-parameters" />
       <module name="swiggy-service-registry" options="-parameters" />
     </option>
